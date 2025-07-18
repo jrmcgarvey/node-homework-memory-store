@@ -38,7 +38,7 @@ const deleteTask = (req, res) => {
   const loggedOnUser = getLoggedOnUser();
   const taskToFind = parseInt(req.params.id);
   if (taskToFind && loggedOnUser.tasklist) {
-    const taskIndex = loggedOnUser.tasklist.indexOf(
+    const taskIndex = loggedOnUser.tasklist.findIndex(
       (task) => task.id === taskToFind,
     );
     if (taskIndex != -1) {
@@ -64,7 +64,7 @@ const create = (req, res) => {
   const newTask = { ...value };
   newTask.id = taskCounter();
   loggedOnUser.tasklist.push(newTask);
-  return res.json(newTask);
+  return res.status(StatusCodes.CREATED).json(newTask);
 };
 
 const update = (req, res) => {

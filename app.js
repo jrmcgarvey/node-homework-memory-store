@@ -17,8 +17,11 @@ const errorHandler = require("./middleware/error-handler");
 app.use(errorHandler);
 
 const port = process.env.PORT || 3000;
+let server;
 try {
-  app.listen(port, () => console.log(`Server is listening on port ${port}...`));
+  server = app.listen(port, () => console.log(`Server is listening on port ${port}...`));
 } catch (error) {
   console.log(error);
 }
+
+module.exports = { app, server }
